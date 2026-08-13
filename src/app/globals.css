@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+:root {
+  color-scheme: light dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar styling */
+.scroll-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #168F6B44;
+  border-radius: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background-color: #168F6B;
+}
+
+/* Focus visible global */
+*:focus-visible {
+  outline: 2px solid #168F6B;
+  outline-offset: 2px;
+}
+
+/* Transition for theme changes */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+}
+
+/* Override for animations that shouldn't transition */
+.no-transition, .no-transition * {
+  transition: none !important;
+}
