@@ -1,5 +1,6 @@
 import { db } from "@/db";
 import { cursos, eixos, perguntas, alternativas } from "@/db/schema";
+import { ensureSeeded } from "@/lib/db-init";
 import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -17,6 +18,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   try {
+    await ensureSeeded();
     const all = await db.select().from(cursos);
     const curso = all.find((c: any) => c.slug === slug);
     if (!curso) return { title: "Curso não encontrado" };
@@ -50,6 +52,7 @@ export default async function CursoPage({ params }: PageProps) {
   let quizPerguntas: Pergunta[] = [];
 
   try {
+    await ensureSeeded();
     const allCursos = await db.select().from(cursos);
     const foundCurso = allCursos.find((c: any) => c.slug === slug);
     if (!foundCurso) notFound();

@@ -1,5 +1,6 @@
 import { db } from "@/db";
 import { eixos, cursos } from "@/db/schema";
+import { ensureSeeded } from "@/lib/db-init";
 import type { Eixo, Curso } from "@/types";
 import EixoCard from "@/components/EixoCard";
 import { Sparkles, ChevronRight, GraduationCap, Calendar } from "lucide-react";
@@ -7,6 +8,7 @@ import Link from "next/link";
 
 async function getEixosComCursos(): Promise<Eixo[]> {
   try {
+    await ensureSeeded();
     const allEixos = await db.select().from(eixos);
     const allCursos = await db.select().from(cursos);
 

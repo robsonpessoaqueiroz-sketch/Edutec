@@ -1,5 +1,6 @@
 import { db } from "@/db";
 import { eixos, cursos } from "@/db/schema";
+import { ensureSeeded } from "@/lib/db-init";
 import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -16,6 +17,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   try {
+    await ensureSeeded();
     const all = await db.select().from(eixos);
     const eixo = all.find((e: any) => e.slug === slug);
     if (!eixo) return { title: "Eixo não encontrado" };
@@ -35,6 +37,7 @@ export default async function EixoPage({ params }: PageProps) {
   let cursosDoEixo: Curso[] = [];
 
   try {
+    await ensureSeeded();
     const allEixos = await db.select().from(eixos);
     const found = allEixos.find((e: any) => e.slug === slug);
     if (!found) notFound();
