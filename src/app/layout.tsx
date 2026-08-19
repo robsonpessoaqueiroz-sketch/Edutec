@@ -8,6 +8,11 @@ export const metadata: Metadata = {
   title: "Novos Cursos Técnicos 2027 — EEEP Profª Maria Célia Pinheiro Falcão",
   description:
     "Conheça os novos cursos técnicos que chegarão à EEEP Professora Maria Célia Pinheiro Falcão a partir de 2027: Administração, Finanças, Fruticultura e Desenvolvimento de Sistemas.",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
